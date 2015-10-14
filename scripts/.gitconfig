@@ -1,0 +1,19 @@
+[user]
+	name = towardstheway@gmail.com
+	email = yunfei_lei@126.com
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	last = log -1 HEAD
+[gui]
+	encoding = utf-8
+[i18n]
+	commitEncoding = utf-8
+	logOutputEncoding = UTF-8
+[core]
+	quotepath = false
