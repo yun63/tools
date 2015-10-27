@@ -1,0 +1,32 @@
+#!/bin/sh
+gen()
+{
+	ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ .
+    echo "tags generating ..."
+}
+
+clean()
+{
+    rm tags
+    echo "clear tags done!"
+}
+
+
+usage()
+{
+    echo "*********************************"
+    echo "usage："
+    echo "1 autogen"
+    echo "2 autogen clean "
+    echo "*********************************"
+}
+
+if [ $# = 0 ]; then
+   gen
+else
+    case $1 in
+        '') usage;;
+        'clean') clean;;
+        *) usage; exit 1;;
+    esac
+fi
