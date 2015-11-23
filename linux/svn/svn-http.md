@@ -60,5 +60,7 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 
 `service httpd restart`
 
+**关闭防火墙及对应端口**
 
+## 3. 配置https
 
