@@ -110,6 +110,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'elzr/vim-json'
+Plugin 'rking/ag.vim'
+Plugin 'christoomey/vim-tmux-navigator'
 call vundle#end()      
 
 """"""""""""""""""""""""""""""
@@ -166,10 +169,25 @@ highlight lightpurple guibg=lightgrey guifg=black
 "set tags=/home/yun63/backup/stl_tags
 "set tags+=/home/yun63/mobile-server/trunk/tags
 
+let g:tern_show_signature_in_pum = 1
+
 """"""""""""""""""""""""""""""
 " ctrlp setting
 """"""""""""""""""""""""""""""
+let g:ctrlp_by_filename = 1
 let g:ctrlp_max_files = 1000
 let g:ctrlp_max_depth = 60
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_depth = 40
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:20'
+
+""""""""""""""""""""""""""""""
+" tmux setting
+""""""""""""""""""""""""""""""
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+
