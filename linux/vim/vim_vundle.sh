@@ -2,7 +2,7 @@
 
 mkdir -p $HOME/.vim/bundle
 
-git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 cp ./vimrc $HOME/.vimrc -f
 
