@@ -113,6 +113,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'elzr/vim-json'
 Plugin 'rking/ag.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'easymotion/vim-easymotion'
 call vundle#end()      
 
 """"""""""""""""""""""""""""""
