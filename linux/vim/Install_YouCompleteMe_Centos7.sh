@@ -7,6 +7,12 @@ CLANG_SRC="cfe-3.7.0"
 COMPILER_RT_SRC="compiler-rt-3.7.0"
 CLANG_TOOLS_EXTRA_SRC="clang-tools-extra-3.7.0"
 
+if [ ! -d $HOME/.vim/bundle/YouCompleteMe ]; then
+    echo "Please install 'YouCompleteMe' first !!"
+    echo "How to install YouCompleteMe, please refer to https://github.com/yun63/tools/vim/vim_vundle.sh"
+    exit 1
+fi;
+
 # download source code 
 if [ ! -f ${CMAKE_SRC}.tar.gz ]; then
     wget https://cmake.org/files/v3.4/${CMAKE_SRC}.tar.gz
