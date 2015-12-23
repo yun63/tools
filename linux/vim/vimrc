@@ -21,6 +21,7 @@ set mouse=a
 set autoindent
 "c/c++缩进
 set cindent
+set cinoptions=g0
 "文件修改之后自动载入
 set autoread
 set nocp
