@@ -1,0 +1,24 @@
+{
+  "name": "mysql_to_lua",
+  "version": "1.0.0",
+  "description": "mysql convert to lua",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "mysql": "^2.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql",
+    "lua",
+    "javascript"
+  ],
+  "author": "leiyunfei",
+  "license": "ISC"
+}

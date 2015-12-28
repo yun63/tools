@@ -1,0 +1,31 @@
+{
+    "tpl_server_list": {
+        "fields": ["id", "name", "ip", "port", "auth_ip", "auth_port"],
+        "keys": ["id"]
+    },
+    "tpl_alliance_flag": {
+        "fields": ["id", "icon", "cost"],
+        "keys": ["id"]
+    },
+    "tpl_talent": {
+        "fields": ["id", "name", "level", "type", "points", "precondition", "attr", "buff", "pos", "desc"],
+        "keys": ["type", "pos", "level"],
+        "stringfy": ["buff", "precondition", "attr"]
+    },
+    "tpl_research_kv": {
+        "fields": ["id", "max_lvl", "btn_id", "icon"],
+        "keys": ["id"],
+        "stringfy": []
+    },
+    "tpl_research_data": {
+        "fields": ["id", "type", "level", "name", "construct_time", "cost", "requrement", "pre", "attr", "desci"],
+        "keys": ["id", "level"],
+        "stringfy": ["cost", "requrement", "pre", "attr"]
+    },
+    "tpl_soldier": {
+        "fields": ["id", "name", "type", "level", "hp", "attack", "phydefense", "magfense", "upkeep", "power", "load", "unlock_barrcklev", "cost", "time"],
+        "keys": ["id"],
+        "stringfy": ["cost"]
+    }
+}
+

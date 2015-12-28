@@ -1,0 +1,8 @@
+{
+    "tpl_talent": {
+        "fields": ["id", "level", "type", "points", "precondition", "attr", "buff"],
+        "keys": ["id", "level"],
+        "stringfy": ["precondition", "attr", "buff"]
+    }
+}
+

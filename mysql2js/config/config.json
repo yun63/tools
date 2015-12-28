@@ -1,0 +1,8 @@
+{
+    "host"  : "192.168.5.185",
+    "user"  : "watchdog",
+    "pass"  : "watchdog",
+    "db"    : "game_tpl",
+    "datapath"  : "./data/",
+    "comments": "ƒ:host 数据库主机ip ƒ:user 数据库用户名 ƒ:passwd 数据库密码 ƒ:db 数据库 ƒ:data 生成json目标路径"
+}

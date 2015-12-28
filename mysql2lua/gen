@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+var conf = require('./config/config.json');
+var parser = require('./lib/parser');
+var mysqlUtil = require('./lib/mysql_utils');
+var tpl = require('./config/tpl.json');
+var program = require('commander');
+var exec = require('child_process').exec;
+
+/* mysql配置信息 */
+var host = conf.host;
+var user = conf.user;
+var pass = conf.pass;
+var db   = conf.db;
+
+program
+  .version('0.0.1');
+
+program
+  .command('all')
+  .description('Generate all the tpl_xxx.json files.')
+  .action(function(){
+    all();
+  });
+
+program
+  .command('*')
+  .description('Generate one tpl_xxx.json file what you want')
+  .action(function(env){
+    one(env);
+  });
+
+
+console.log(' 使用方法:');
+console.log();
+console.log(' $ ./gen all # 生成所有表配置数据');
+console.log(' $ ./gen tpl_xxx # 生成tpl_xxx表的配置数据');
+console.log();
+
+program.parse(process.argv);
+
+function all() {
+  console.log('ƒ 开始生成全部数据...');
+
+  /* 创建mysql连接 */
+  var connect =  mysqlUtil.createConnection(host, user, pass, db);
+
+  /* 从mysql数据库拉取表数据、转换成lua格式并保存 */
+  for (var tab in tpl) {
+    parser.fetchData2LuaFile(connect, tab, tpl[tab]);
+  }
+  /* 关闭连接 */
+  mysqlUtil.close(connect);
+
+  //return console.log('[SUCCESS] 生成数据成功!!!! ^_^');
+}
+
+function one(name) {
+  if (name in tpl) {
+    console.log('ƒ 开始生成%s数据...', name);
+
+    /* 创建mysql连接 */
+    var connect =  mysqlUtil.createConnection(host, user, pass, db);
+
+    /* 从mysql数据库拉取表数据、转换成lua格式并保存 */
+    parser.fetchData2LuaFile(connect, name, tpl[name]);
+    /* 关闭连接 */
+    mysqlUtil.close(connect);
+  } else {
+    console.log("ƒ %s 不存在，请检查配置tpl.json...", name);
+  }
+}
