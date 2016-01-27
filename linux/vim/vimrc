@@ -179,7 +179,7 @@ let g:tern_show_signature_in_pum = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_files = 1000
 let g:ctrlp_max_depth = 60
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_depth = 40
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:20'
 
