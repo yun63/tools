@@ -4,7 +4,7 @@ mkdir -p $HOME/.vim/bundle
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-cp ./vimrc $HOME/.vimrc -f
+cp -f ./vimrc $HOME/.vimrc
 
 echo "Now Please follow below steps "
 echo ""
