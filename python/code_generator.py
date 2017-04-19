@@ -44,6 +44,7 @@ class CodeGenerator(object):
         keys = [random.choice(cls.base_string()) for i in range(cls.KEY_LEN)]
         return "".join(keys)
 
+    @output
     def gen(self, result = None):
         if result is None:
             result = []
@@ -54,5 +55,6 @@ class CodeGenerator(object):
 
 if __name__ == '__main__':
     cg = CodeGenerator(200)
-    codes = cg.gen()
-    print codes
+    #codes = cg.gen()
+    cg.gen()
+    #print codes
