@@ -1,0 +1,23 @@
+daemonize no
+pidfile ./data/redis-%d.pid
+port %d
+timeout 0
+loglevel verbose
+logfile ./data/redis-%d.log
+databases 16
+rdbcompression yes
+dbfilename dump-%d.rdb
+dir ./data/
+slaveof %s %d
+repl-timeout 360
+slave-serve-stale-data yes
+appendfilename redis-slvae-%d.aof
+appendonly yes
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+activerehashing yes
+
