@@ -59,12 +59,12 @@ $(LIBS_PATH):
 
 $(LIBS_PATH)/libcommon.a: $(COMMON_OBJECTS) | $(LIBS_PATH)
 	@echo "-- Linking static library $@"
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
 	@$(RANLIB) $@
 
 $(LIBS_PATH)/libcommon.so: $(COMMON_OBJECTS) | $(LIBS_PATH)
 	@echo "-- Linking shared library $@"
-	$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS)
+	@$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS)
 
 
 $(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o
