@@ -221,7 +221,7 @@ void movn(char *str, int pos, int n) {
 
 char *ReplaceSpace(char *str, uint32_t len) {
     uint32_t space_count = 0;
-    for (int i = 0; i < len; ++i) {
+    for (uint32_t i = 0; i < len; ++i) {
         if (str[i] == ' ') ++space_count;
     }
 
