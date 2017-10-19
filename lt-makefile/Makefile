@@ -22,6 +22,10 @@ INCPATHS := -I$(BASE_DIR)/include -I$(BASE_DIR)/src#$(addprefix -I, $(HDRS))
 ## 库文件搜索路径及库
 LIBS := $(addprefix -L, $(LIBPATHS)) -lm
 
+## 动态库搜索路径
+COMMA = ,
+SOPATHS = $(addprefix -Wl$(COMMA)-rpath=, $(LIBPATHS))
+
 ## 源代码子目录
 SRCDIRS := $(BASE_DIR)/include $(BASE_DIR)/src
 
@@ -64,7 +68,7 @@ $(LIBS_PATH)/libcommon.a: $(COMMON_OBJECTS) | $(LIBS_PATH)
 
 $(LIBS_PATH)/libcommon.so: $(COMMON_OBJECTS) | $(LIBS_PATH)
 	@echo -e --$(PURPLE) Linking shared library $@ $(NC)
-	@$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS)
+	@$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS) $(SOPATHS)
 
 
 $(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o
