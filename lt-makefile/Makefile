@@ -58,33 +58,33 @@ $(LIBS_PATH):
 	@mkdir $(LIBS_PATH)
 
 $(LIBS_PATH)/libcommon.a: $(COMMON_OBJECTS) | $(LIBS_PATH)
-	@echo "-- Linking static library $@"
+	@echo -e --$(PURPLE) Linking static library $@ $(NC)
 	@$(AR) $(ARFLAGS) $@ $^
 	@$(RANLIB) $@
 
 $(LIBS_PATH)/libcommon.so: $(COMMON_OBJECTS) | $(LIBS_PATH)
-	@echo "-- Linking shared library $@"
+	@echo -e --$(PURPLE) Linking shared library $@ $(NC)
 	@$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS)
 
 
 $(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o
-	@echo "-- Generating $@"
+	@echo -e --$(CYAN) Built $@ $(NC)
 	@$(CXX) $^ -o $@ $(INCPATHS) $(LIBS) -L$(LIBS_PATH) -lcommon
 
 %.o:%.cpp
-	@echo "-- Building $@"
+	@echo -e --$(GREEN) Building $@ $(NC)
 	@$(CXX) -c $(CXXFLAGS) $(MYCFLAGS) $< -o $@ $(INCPATHS) 
 
 %.o:%.cc
-	@echo "-- Building $@"
+	@echo -e --$(GREEN) Building $@ $(NC)
 	@$(CXX) -c $(CXXFLAGS) $(MYCFLAGS) $< -o $@ $(INCPATHS) 
 
 %.o:%.cxx
-	@echo "-- Building $@"
+	@echo -e --$(GREEN) Building $@ $(NC)
 	@$(CXX) -c $(CXXFLAGS) $(MYCFLAGS) $< -o $@ $(INCPATH) 
 
 %.o:%.c
-	@echo "-- Building $@"
+	@echo -e --$(GREEN) Building $@ $(NC)
 	@$(CC) -c $(CFLAGS) $(MYCFLAGS) $< -o $@ $(INCPATH) 
 
 #-------------------------------------
