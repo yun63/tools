@@ -20,7 +20,7 @@ DEBUG := 1
 INCPATHS := -I$(BASE_DIR)/include -I$(BASE_DIR)/src#$(addprefix -I, $(HDRS)) 
 
 ## 库文件搜索路径及库
-LIBS := $(addprefix -L, $(LIBPATHS))
+LIBS := $(addprefix -L, $(LIBPATHS)) -lm
 
 ## 源代码子目录
 SRCDIRS := $(BASE_DIR)/include $(BASE_DIR)/src
@@ -69,7 +69,7 @@ $(LIBS_PATH)/libcommon.so: $(COMMON_OBJECTS) | $(LIBS_PATH)
 
 $(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o
 	@echo "-- Generating $@"
-	@$(CXX) $^ -o $@ $(INCPATHS) $(LIBS) -static -L$(LIBS_PATH) -lcommon
+	@$(CXX) $^ -o $@ $(INCPATHS) $(LIBS) -L$(LIBS_PATH) -lcommon
 
 %.o:%.cpp
 	@echo "-- Building $@"
