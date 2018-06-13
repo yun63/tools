@@ -53,7 +53,6 @@ COMMON_SOURCES = $(foreach d, $(COMMON_DIRS), $(wildcard $(addprefix $(d)/*, $(S
 COMMON_OBJECTS = $(addsuffix .o, $(basename $(COMMON_SOURCES)))
 
 SAMPLES_TARGETS = $(LIBS_PATH)/libcommon.a \
-	$(LIBS_PATH)/libcommon.so \
 	$(foreach v, $(SAMPLES), $(SAMPLES_PATH)/$(v)) \
 
 all: $(SAMPLES_TARGETS)
@@ -71,7 +70,7 @@ $(LIBS_PATH)/libcommon.so: $(COMMON_OBJECTS) | $(LIBS_PATH)
 	@$(LINK) -fPIC --shared $^ -o $@ $(INCPATHS) $(LIBS) $(SOPATHS)
 
 
-$(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o
+$(SAMPLES_PATH)/executable: $(SAMPLES_PATH)/main.o | $(LIBS_PATH)/libcommon.a
 	@echo -e --$(CYAN) Built $@ $(NC)
 	@$(CXX) $^ -o $@ $(INCPATHS) $(LIBS) -L$(LIBS_PATH) -lcommon
 
