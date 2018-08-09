@@ -16,7 +16,7 @@ filetype plugin indent on
 "显示行号
 set nu
 "允许鼠标选中
-set mouse=a
+set mouse=v
 "自动缩进
 set autoindent
 "c/c++缩进
@@ -45,12 +45,13 @@ set hlsearch
 set langmenu=zh_CN.UTF-8
 language messages zh_CN.UTF-8
 set termencoding=utf-8
-set encoding=utf-8
+set encoding=UTF-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 "保存历史命令
 set history=100
 set t_Co=256
+set t_ut=
 set wildmenu
 "显示标尺
 set ruler
@@ -80,7 +81,7 @@ set smarttab
 set wrap
 set completeopt=menuone,menu,longest
 
-let mapleader = ","
+"let mapleader = " "
 let g:mapleader = "\\"
 
 "Vundle插件管理
@@ -90,46 +91,43 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
-Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vim-cpp-enhanced-highlight'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/The-NERD-Commenter'
-Plugin 'radovskyb/vim-uncommenter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'sjas/csExplorer'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'yun63/c.vim'
 Plugin 'vim-scripts/winmanager'
 Plugin 'vim-scripts/doxygen-support.vim'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'yun63-scripts/c.vim'
-Plugin 'tbastos/vim-lua'
+Plugin 'vim-scripts/The-NERD-Commenter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'elzr/vim-json'
 Plugin 'rking/ag.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'mattn/calendar-vim'
-Plugin 'cosminadrianpopescu/vim-tail'
-Plugin 'MattesGroeger/vim-bookmarks'
-"Plugin 'elzr/vim-json'
-"Plugin 'oscarh/vimerl'
-"Plugin 'fatih/vim-go'
-"Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'dunstontc/vim-vscode-theme'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'dhruvasagar/vim-table-mode'
+
 call vundle#end()      
 
 """"""""""""""""""""""""""""""
 " colorscheme setting
 """"""""""""""""""""""""""""""
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 syntax enable
-colorscheme solarized 
-set background=light
+colorscheme codedark
+"set background=dark
 
 """"""""""""""""""""""""""""""
 " 快捷键隐射
@@ -138,6 +136,8 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
+nnoremap <leader>\ :vs<CR>
+nnoremap <leader>- :sp<CR>
 imap <C-k> <esc>C
 nmap <leader>cn :cn<cr>
 nmap <leader>cp :cp<cr>
@@ -157,6 +157,27 @@ let loaded_feraltogglecommentify = 1
 autocmd FileType vim set nofen
 autocmd FileType vim map <buffer> <leader><space> :w!<cr>:source %<cr>
 autocmd FileType c,cpp  map <buffer> <leader><space> :make<cr>
+autocmd BufNewFile *.py 0r ~/.vim/py.tmpl
+autocmd BufNewFile *.py ks|call FileName()|'s
+autocmd BufNewFile *.py ks|call CreateTime()|'s
+
+fun FileName()
+    if line("$") > 25
+        let l = 25
+    else
+        let l = line("$")
+    endif
+    exe "1," . l . "g/@File:.*/s/@File:.*/@File: " .expand("%")
+endfun
+
+fun CreateTime()
+    if line("$") > 25
+        let l = 25
+    else
+        let l = line("$")
+    endif
+    exe "1," . l . "g/@Create:.*/s/@Create:.*/@Create: " .strftime("%Y-%m-%d %T")
+endfun
 
 let g:vimrc_loaded = 1
 
@@ -168,7 +189,17 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_confirm_extra_conf = 0
 
-let g:mucomplete#enable_auto_at_startup = 1
+let g:ycm_key_list_select_completion =
+      \ get( g:, 'ycm_key_list_select_completion', [] )
+
+let g:ycm_key_list_previous_completion =
+      \ get( g:, 'ycm_key_list_previous_completion', [] )
+
+let g:ycm_show_diagnostics_ui =
+      \ get( g:, 'ycm_show_diagnostics_ui',
+      \ get( g:, 'ycm_register_as_syntastic_checker', 0 ) )
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 highlight darkblue guibg=darkgrey  guifg=black
 highlight lightpurple guibg=lightgrey guifg=black
@@ -185,22 +216,22 @@ let g:tern_show_signature_in_pum = 1
 " ctrlp setting
 """"""""""""""""""""""""""""""
 let g:ctrlp_by_filename = 1
-let g:ctrlp_max_files = 1000
-let g:ctrlp_max_depth = 60
+let g:ctrlp_max_files = 3000
+let g:ctrlp_max_depth = 20
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_depth = 40
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:20'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(o|pyc|so)$'
+            \ }
 
-
-""""""""""""""""""""""""""""""
-" calendar setting
-""""""""""""""""""""""""""""""
-let g:calendar_diary = "~/Notes"
-let g:calendar_monday = 1
-let g:calendar_focus_today = 1
-let g:calendar_mark = 'right'
-let g:calendar_mruler = '一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月'
-let g:calendar_wruler = '日 一 二 三 四 五 六'
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 """"""""""""""""""""""""""""""
 " tmux setting
