@@ -1,11 +1,11 @@
 #!/bin/bash
 
 home=`cd $(dirname $0); pwd`
-CMAKE_SRC="cmake-3.4.1"
-LLVM_SRC="llvm-3.7.0"
-CLANG_SRC="cfe-3.7.0"
-COMPILER_RT_SRC="compiler-rt-3.7.0"
-CLANG_TOOLS_EXTRA_SRC="clang-tools-extra-3.7.0"
+CMAKE_SRC="cmake-3.13.2"
+LLVM_SRC="llvm-7.0.1"
+CLANG_SRC="cfe-7.0.1"
+COMPILER_RT_SRC="compiler-rt-7.0.1"
+CLANG_TOOLS_EXTRA_SRC="clang-tools-extra-7.0.1"
 
 if [ ! -d $HOME/.vim/bundle/YouCompleteMe ]; then
     echo "Please install 'YouCompleteMe' first !!"
@@ -15,23 +15,23 @@ fi;
 
 # download source code 
 if [ ! -f ${CMAKE_SRC}.tar.gz ]; then
-    wget https://cmake.org/files/v3.4/${CMAKE_SRC}.tar.gz
+    wget https://cmake.org/files/v3.13/${CMAKE_SRC}.tar.gz
 fi
 
 if [ ! -f ${LLVM_SRC}.src.tar.xz ]; then
-    wget http://llvm.org/releases/3.7.0/${LLVM_SRC}.src.tar.xz
+    wget http://releases.llvm.org/7.0.1/${LLVM_SRC}.src.tar.xz
 fi
 
 if [ ! -f ${CLANG_SRC}.src.tar.xz ]; then
-    wget http://llvm.org/releases/3.7.0/${CLANG_SRC}.src.tar.xz
+    wget http://releases.llvm.org/7.0.1/${CLANG_SRC}.src.tar.xz
 fi
 
 if [ ! -f ${COMPILER_RT_SRC}.src.tar.xz ]; then
-    wget http://llvm.org/releases/3.7.0/${COMPILER_RT_SRC}.src.tar.xz
+    wget http://releases.llvm.org/7.0.1/${COMPILER_RT_SRC}.src.tar.xz
 fi
 
 if [ ! -f ${CLANG_TOOLS_EXTRA_SRC}.src.tar.xz ]; then
-    wget http://llvm.org/releases/3.7.0/${CLANG_TOOLS_EXTRA_SRC}.src.tar.xz
+    wget http://releases.llvm.org/7.0.1/${CLANG_TOOLS_EXTRA_SRC}.src.tar.xz
 fi
 
 mkdir -p build
@@ -52,7 +52,7 @@ mv ${COMPILER_RT_SRC}.src ${LLVM_SRC}.src/projects/compiler-rt -f
 # build and install cmake llvm
 cd ${CMAKE_SRC} && ./bootstrap
 make -j4 && sudo make install
-cd build && ../llvm-3.7.0.src/configure --enable-optimized --enable-targets=host-only
+cd build && ../llvm-7.0.1.src/configure --enable-optimized --enable-targets=host-only
 make -j4 && sudo make install
 
 cd $HOME/.vim/bundle/YouCompleteMe
