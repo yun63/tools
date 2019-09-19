@@ -89,7 +89,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
+Plugin 'Yggdroot/LeaderF'
+"Plugin 'kien/ctrlp.vim' 被Leaderf替换
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Lokaltog/vim-powerline'
@@ -114,11 +115,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'dunstontc/vim-vscode-theme'
 "Plugin 'godlygeek/tabular'
-"Plugin 'altercation/vim-colors-solarized'
-"Plugin 'flazz/vim-colorschemes'
 "Plugin 'marijnh/tern_for_vim'
-"Plugin 'elzr/vim-json'
-"Plugin 'rdnetto/YCM-Generator'
 call vundle#end()      
 
 """"""""""""""""""""""""""""""
@@ -212,15 +209,23 @@ let g:tern_show_signature_in_pum = 1
 """"""""""""""""""""""""""""""
 " ctrlp setting
 """"""""""""""""""""""""""""""
-let g:ctrlp_by_filename = 1
-let g:ctrlp_max_files = 3000
-let g:ctrlp_max_depth = 20
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-            \ 'file': '\v\.(o|pyc|so)$'
-            \ }
+"let g:ctrlp_by_filename = 1
+"let g:ctrlp_max_files = 3000
+"let g:ctrlp_max_depth = 20
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
+"let g:ctrlp_custom_ignore = {
+"            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"            \ 'file': '\v\.(o|pyc|so)$'
+"            \ }
+"
+
+""""""""""""""""""""""""""""""
+" Leaderf setting
+""""""""""""""""""""""""""""""
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ReverseOrder = 1
+
 
 """"""""""""""""""""""""""""""
 " ag setting
