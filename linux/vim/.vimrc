@@ -27,11 +27,11 @@ set autoread
 set nocp
 set nocompatible
 "忽略文件类型
-set wildignore=*.o,*~,*.pyc,.git\*,.hg\*,.svn\*,*.beam
+set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*.beam
 "启动的时候不显示那个援助索马里儿童的提示
 set shortmess=atI
 "设置折叠
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=10 
 "突出显示当前列
 set cursorline
@@ -82,42 +82,54 @@ set wrap
 set completeopt=menuone,menu,longest
 
 "let mapleader = " "
-let g:mapleader = "\\"
+"let g:mapleader = "\\"
+let mapleader = ","
 
 "Vundle插件管理
 filetype off 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'vim-cpp-enhanced-highlight'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'sjas/csExplorer'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'yun63/c.vim'
 Plugin 'vim-scripts/winmanager'
-Plugin 'vim-scripts/doxygen-support.vim'
+Plugin 'yun63/doxygen-support.vim'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/The-NERD-Commenter'
-Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'elzr/vim-json'
-Plugin 'rking/ag.vim'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'dunstontc/vim-vscode-theme'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'rking/ag.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'skygragon/leetcode-cli'
+Plugin 'fatih/vim-go'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'dracula/vim'
+Plugin 'Yggdroot/LeaderF'
+Plugin 'tpope/vim-fugitive'
+Plugin 'exvim/ex-utility'
+Plugin 'exvim/ex-project'
+Plugin 'morhetz/gruvbox'
+Plugin 'tomasr/molokai'
+Plugin 'ayu-theme/ayu-vim'
+Plugin 'romainl/Apprentice'
+
+"Plugin 'zxqfl/tabnine-vim'
+"Plugin 'marijnh/tern_for_vim'
 
 call vundle#end()      
 
@@ -126,22 +138,20 @@ call vundle#end()
 """"""""""""""""""""""""""""""
 "let g:solarized_termcolors=256
 syntax enable
-colorscheme codedark
-"set background=dark
+colorscheme gruvbox
+set background=dark
+let g:Powerline_theme = 'default'
+let g:Powerline_colorscheme = 'default'
 
 """"""""""""""""""""""""""""""
 " 快捷键隐射
 """"""""""""""""""""""""""""""
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
-imap <C-k> <esc>C
-nmap <leader>cn :cn<cr>
-nmap <leader>cp :cp<cr>
-nmap <leader>cw :cw 10<cr>
+inoremap <C-k> <C-O>C
+inoremap <C-h> <left>
+inoremap <C-l> <right>
+
 
 """"""""""""""""""""""""""""""
 " winmanager setting
@@ -154,9 +164,7 @@ autocmd BufWinEnter \[Buf\ List\] setl nonumber
 let g:netrw_winsize = 30
 let loaded_feraltogglecommentify = 1
 
-autocmd FileType vim set nofen
-autocmd FileType vim map <buffer> <leader><space> :w!<cr>:source %<cr>
-autocmd FileType c,cpp  map <buffer> <leader><space> :make<cr>
+"autocmd FileType vim set nofen
 autocmd BufNewFile *.py 0r ~/.vim/py.tmpl
 autocmd BufNewFile *.py ks|call FileName()|'s
 autocmd BufNewFile *.py ks|call CreateTime()|'s
@@ -200,46 +208,43 @@ let g:ycm_show_diagnostics_ui =
       \ get( g:, 'ycm_register_as_syntastic_checker', 0 ) )
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <silent><leader>f :Ag <cword><CR>
 
-highlight darkblue guibg=darkgrey  guifg=black
-highlight lightpurple guibg=lightgrey guifg=black
-
-""""""""""""""""""""""""""""""
-" ctags setting
-""""""""""""""""""""""""""""""
-"set tags=/home/yun63/backup/stl_tags
-"set tags+=/home/yun63/mobile-server/trunk/tags
+" highlight Cursorline ctermfg=darkred ctermbg=cyan cterm=bold guifg=white guibg=yellow gui=bold
 
 let g:tern_show_signature_in_pum = 1
 
-""""""""""""""""""""""""""""""
-" ctrlp setting
-""""""""""""""""""""""""""""""
-let g:ctrlp_by_filename = 1
-let g:ctrlp_max_files = 3000
-let g:ctrlp_max_depth = 20
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-            \ 'file': '\v\.(o|pyc|so)$'
-            \ }
-
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_StlColorscheme = 'powerline'
 
 """"""""""""""""""""""""""""""
 " tmux setting
 """"""""""""""""""""""""""""""
-let g:tmux_navigator_no_mappings = 1
+"let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+"nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+"nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
+nnoremap <silent> <leader>o :EXProjectToggle<CR>
+
+au BufNewFile,BufRead *.py set tabstop=4
+au BufNewFile,BufRead *.py set softtabstop=4
+au BufNewFile,BufRead *.py set shiftwidth=4
+
+""""""""""""""""""""""""""""""
+" indentLine setting
+""""""""""""""""""""""""""""""
+let g:indentLine_char = "┆"
+let g:indentLine_enabled = 0
+"let g:indentLine_setConceal = 0
+
+""""""""""""""""""""""""""""""
+" easymotion setting
+""""""""""""""""""""""""""""""
+nnoremap s <Plug>(easymotion-sn)
+
+let Tlist_Use_Right_Window = 1
+
+let g:AutoPairsMapCh = 0
