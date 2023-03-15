@@ -87,58 +87,44 @@ let mapleader = ","
 
 "Vundle插件管理
 filetype off 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'vim-cpp-enhanced-highlight'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sjas/csExplorer'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'yun63/c.vim'
-Plugin 'vim-scripts/winmanager'
-Plugin 'yun63/doxygen-support.vim'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/The-NERD-Commenter'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'dunstontc/vim-vscode-theme'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'rking/ag.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'skygragon/leetcode-cli'
-Plugin 'fatih/vim-go'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'dracula/vim'
-Plugin 'Yggdroot/LeaderF'
-Plugin 'tpope/vim-fugitive'
-Plugin 'exvim/ex-utility'
-Plugin 'exvim/ex-project'
-Plugin 'morhetz/gruvbox'
-Plugin 'tomasr/molokai'
-Plugin 'ayu-theme/ayu-vim'
-Plugin 'romainl/Apprentice'
-
-"Plugin 'zxqfl/tabnine-vim'
-"Plugin 'marijnh/tern_for_vim'
-
-call vundle#end()      
+call plug#begin()
+Plug 'Lokaltog/vim-powerline'
+Plug 'scrooloose/nerdtree'
+Plug 'sjas/csExplorer'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'vim-scripts/winmanager'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/The-NERD-Commenter'
+Plug 'plasticboy/vim-markdown'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tomasiser/vim-code-dark'
+Plug 'dunstontc/vim-vscode-theme'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'rking/ag.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'easymotion/vim-easymotion'
+Plug 'skygragon/leetcode-cli'
+Plug 'fatih/vim-go'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'dracula/vim'
+Plug 'tpope/vim-fugitive'
+Plug 'exvim/ex-utility'
+Plug 'exvim/ex-project'
+Plug 'morhetz/gruvbox'
+Plug 'tomasr/molokai'
+Plug 'ayu-theme/ayu-vim'
+Plug 'romainl/Apprentice'
+Plug 'dracula/vim', { 'name': 'dracula'  }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+call plug#end()      
 
 """"""""""""""""""""""""""""""
 " colorscheme setting
 """"""""""""""""""""""""""""""
 "let g:solarized_termcolors=256
 syntax enable
-colorscheme gruvbox
+colorscheme codedark
 set background=dark
 let g:Powerline_theme = 'default'
 let g:Powerline_colorscheme = 'default'
@@ -146,12 +132,17 @@ let g:Powerline_colorscheme = 'default'
 """"""""""""""""""""""""""""""
 " 快捷键隐射
 """"""""""""""""""""""""""""""
+nnoremap <silent> <c-h> <c-w>h
+nnoremap <silent> <c-j> <c-w>j
+nnoremap <silent> <c-k> <c-w>k
+nnoremap <silent> <c-l> <c-w>l
+nnoremap <silent> <leader>f :Ag!<cword><CR>
+nnoremap <silent> <leader>o :EXProjectToggle<CR>
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
 inoremap <C-k> <C-O>C
 inoremap <C-h> <left>
 inoremap <C-l> <right>
-
 
 """"""""""""""""""""""""""""""
 " winmanager setting
@@ -207,27 +198,14 @@ let g:ycm_show_diagnostics_ui =
       \ get( g:, 'ycm_show_diagnostics_ui',
       \ get( g:, 'ycm_register_as_syntastic_checker', 0 ) )
 
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-nnoremap <silent><leader>f :Ag <cword><CR>
 
 " highlight Cursorline ctermfg=darkred ctermbg=cyan cterm=bold guifg=white guibg=yellow gui=bold
 
 let g:tern_show_signature_in_pum = 1
 
-let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_StlColorscheme = 'powerline'
-
-""""""""""""""""""""""""""""""
-" tmux setting
-""""""""""""""""""""""""""""""
-"let g:tmux_navigator_no_mappings = 1
-
-"nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-"nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-"nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-"nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-
-nnoremap <silent> <leader>o :EXProjectToggle<CR>
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShortcutF = '<C-P>'
 
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
@@ -243,8 +221,10 @@ let g:indentLine_enabled = 0
 """"""""""""""""""""""""""""""
 " easymotion setting
 """"""""""""""""""""""""""""""
-nnoremap s <Plug>(easymotion-sn)
+nmap s <Plug>(easymotion-sn)
 
 let Tlist_Use_Right_Window = 1
 
 let g:AutoPairsMapCh = 0
+let g:ag_highlight=1
+
